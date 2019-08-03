@@ -30,13 +30,13 @@ public class Event {
 				
 				if (parameterTypes.length == 1) {
 					Class<?> parameterTypeEvent = parameterTypes[0];
-					if (parameterTypeEvent.getInterfaces()[0].equals(IEventInfo.class)) {
+					//if (parameterTypeEvent.getInterfaces()[0].equals(IEventInfo.class)) {
 						String eventName = parameterTypeEvent.getName();
 						listenMethods.putIfAbsent(eventName, new ArrayList<>());
 						List<Method> allMethods = listenMethods.computeIfAbsent(eventName, k -> new ArrayList<>());
 						allMethods.add(method);
 						rightMethod = true;
-					}
+					//}
 				}
 				
 				if (!rightMethod) {
@@ -46,7 +46,7 @@ public class Event {
 		}
 	}
 	
-	public static void fire(IEventInfo eventInfo) {
+	public static <T> void fire(T eventInfo) {
 		String eventName = eventInfo.getClass().getName();
 		List<Method> allMethods = listenMethods.get(eventName);
 		if (null != allMethods) {
@@ -63,7 +63,7 @@ public class Event {
 		}
 	}
 	
-	public static void fireEffectiveTest(IEventInfo eventInfo) {
+	public static <T> void fireEffectiveTest(T eventInfo) {
 		
 		EventGameEnd eventGameEnd = (EventGameEnd)eventInfo;
 		

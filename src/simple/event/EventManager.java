@@ -11,7 +11,7 @@ public class EventManager {
 	public static long count3 = 0;
 	
 	@ListenEvent
-	public static void OnEventTest(EventGameStart eventInfo) {
+	public static void OnEventStarGame(EventGameStart eventInfo) {
 		System.out.println("OnEventTest EventGameStart");
 	}
 	
