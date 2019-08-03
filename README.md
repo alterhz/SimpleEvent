@@ -4,7 +4,7 @@ designed by java reflection.  a simple synchronized event.
 
 SimpleEvent in 3 step.
 
-1. Define event
+1. Define event.
 	    
 		public class EventGameStart {
 			public EventGameStart() {
@@ -12,7 +12,7 @@ SimpleEvent in 3 step.
 			}
 		}
 
-2. Prepare subscribe.
+2. Listen event.
 	
 	    @ListenEvent
     	public static void OnEventStarGame(EventGameStart eventInfo) {
