@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Consumer;
 
+import simple.event.ClassTools;
 import simple.event.EventManager;
 import simple.event.info.EventGameEnd;
 
@@ -16,16 +18,16 @@ public class Event {
 	
 	private static Map<String, List<Method>> listenMethods = new HashMap<>();
 	
-	static {
-		initListen();
-	}
-	
-	public static void registe() {
+	public static void listen() {
+		Set<Class<?>> eventClasses = ClassTools.getClasses("simple.event");
 		
+		for (Class<?> eventClass : eventClasses) {
+			registClass(eventClass);
+		}
 	}
 	
-	public static void initListen() {
-		Method[] methods = EventManager.class.getDeclaredMethods();
+	public static void registClass(Class<?> c) {
+		Method[] methods = c.getDeclaredMethods();
 		for (Method method : methods) {
 			if (method.isAnnotationPresent(ListenEvent.class)) {
 				Class<?>[] parameterTypes = method.getParameterTypes();
