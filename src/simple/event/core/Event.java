@@ -20,6 +20,10 @@ public class Event {
 		initListen();
 	}
 	
+	public static void registe() {
+		
+	}
+	
 	public static void initListen() {
 		Method[] methods = EventManager.class.getDeclaredMethods();
 		for (Method method : methods) {

@@ -1,9 +1,11 @@
 package simple.event;
 
+import simple.event.core.Listener;
 import simple.event.core.ListenEvent;
 import simple.event.info.EventGameEnd;
 import simple.event.info.EventGameStart;
 
+@Listener
 public class EventManager {
 
 	public static long count = 0;
