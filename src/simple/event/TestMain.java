@@ -8,7 +8,8 @@ import simple.event.info.EventTest;
 public class TestMain {
 	public static void main(String[] args) {
 		
-		Event.listen();
+		Event.listen("simple.event.info");
+		Event.listen("simple.event.manager");
 
 		Event.fire(new EventGameStart());
 		Event.fire(new EventGameEnd());
@@ -16,9 +17,8 @@ public class TestMain {
 	}
 	
 	public void otherTest() {
-		// 函数调用、函数式接口调用和反射Invoke调用效率对比
-		Event.fireEffectiveTest(new EventGameEnd());
 		
-		EventManager.printCount();
 	}
+	
+	
 }

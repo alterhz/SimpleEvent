@@ -1,11 +1,9 @@
 package simple.event;
 
-import simple.event.core.Listener;
 import simple.event.core.ListenEvent;
 import simple.event.info.EventGameEnd;
 import simple.event.info.EventGameStart;
 
-@Listener
 public class EventManager {
 
 	public static long count = 0;
@@ -13,30 +11,30 @@ public class EventManager {
 	public static long count3 = 0;
 	
 	@ListenEvent
-	public static void OnEventStarGame(EventGameStart eventInfo) {
-		System.out.println("OnEventTest EventGameStart");
+	public static void onEventStartGame(EventGameStart eventInfo) {
+		System.out.println("EventManager.onEventStartGame EventGameStart");
 	}
 	
 	@ListenEvent
-	public static void OnEventTest2(EventGameStart eventInfo) {
-		System.out.println("OnEventTest2 EventGameStart");
+	public static void onEventTest2(EventGameStart eventInfo) {
+		System.out.println("EventManager.onEventTest2 EventGameStart");
 	}
 	
 	@ListenEvent
-	public static void OnEventEnd(EventGameEnd eventInfo) {
-		System.out.println("OnEventEnd EventGameEnd");
+	public static void onEventEnd(EventGameEnd eventInfo) {
+		System.out.println("EventManager.onEventEnd EventGameEnd");
 	}
 	
 	@ListenEvent
-	public static void OnEventEnd1(EventGameEnd eventInfo) {
+	public static void onEventEnd1(EventGameEnd eventInfo) {
 		++count;
 	}
 	
-	public static void OnEventEnd2(EventGameEnd eventInfo) {
+	public static void onEventEnd2(EventGameEnd eventInfo) {
 		++count2;
 	}
 	
-	public static void OnEventEnd3(EventGameEnd eventInfo) {
+	public static void onEventEnd3(EventGameEnd eventInfo) {
 		++count3;
 	}
 	
@@ -46,10 +44,10 @@ public class EventManager {
 		System.out.println("count3:" + count3);
 	}
 	
-	@ListenEvent
-	public static void OnEventTest3(EventGameStart eventInfo, int n) {
-		System.out.println("OnEventTest2 EventGameStart");
-	}
+//	@ListenEvent
+//	public static void OnEventTest3(EventGameStart eventInfo, int n) {
+//		System.out.println("OnEventTest2 EventGameStart");
+//	}
 	
 //	@ListenEvent(EventGameStart.class)
 //	public static void OnEventTest(EventGameStart eventInfo) {

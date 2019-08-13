@@ -9,7 +9,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
-import simple.event.ClassTools;
+import javax.management.RuntimeErrorException;
+
 import simple.event.EventManager;
 import simple.event.info.EventGameEnd;
 
@@ -18,8 +19,8 @@ public class Event {
 	
 	private static Map<String, List<Method>> listenMethods = new HashMap<>();
 	
-	public static void listen() {
-		Set<Class<?>> eventClasses = ClassTools.getClasses("simple.event");
+	public static void listen(String packagePath) {
+		Set<Class<?>> eventClasses = ClassTools.getClasses(packagePath);
 		
 		for (Class<?> eventClass : eventClasses) {
 			registClass(eventClass);
@@ -46,7 +47,7 @@ public class Event {
 				}
 				
 				if (!rightMethod) {
-					System.out.println("ListenEvent监听函数[" + method + "]参数错误");
+					throw new RuntimeException("ListenEvent监听函数[" + method + "]参数错误");
 				}
 			}
 		}
@@ -67,43 +68,6 @@ public class Event {
 				}
 			}
 		}
-	}
-	
-	public static <T> void fireEffectiveTest(T eventInfo) {
-		
-		EventGameEnd eventGameEnd = (EventGameEnd)eventInfo;
-		
-		try {
-			Method method = EventManager.class.getDeclaredMethod("OnEventEnd1", EventGameEnd.class);
-			
-			Consumer<EventGameEnd> func1 = (Consumer<EventGameEnd>)EventManager::OnEventEnd3;
-			
-			int loop = 100000000;
-			
-			long t1 = System.currentTimeMillis();
-			for (int i=0; i<loop; ++i) {
-				method.invoke(null, eventGameEnd);
-			}
-			long t2 = System.currentTimeMillis();
-			for (int i=0; i<loop; ++i) {
-				EventManager.OnEventEnd2(eventGameEnd);
-			}
-			long t3 = System.currentTimeMillis();
-			for (int i=0; i<loop; ++i) {
-				func1.accept(eventGameEnd);
-			}
-			long t4 = System.currentTimeMillis();
-			
-			System.out.println("call refection invoke:" + (t2-t1));
-			System.out.println("call function directly:" + (t3-t2));
-			System.out.println("call function interface:" + (t4-t3));
-			
-		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
 	}
 	
 }
